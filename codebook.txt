@@ -8,7 +8,6 @@
 "itrustavg": average political trust (25, 50, 75, scale 1-100)           
 "stepsn": number of iterations until completion (this could be 150 or 500, if it finishes sooner, then it'll say)          
 "fininitval": disregard
-"whoknows": disregard       
 "X": again, run number                  
 "agents.n": number of agents            
 "links.n": number of links formed             

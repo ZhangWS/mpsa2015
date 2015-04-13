@@ -4,13 +4,14 @@ library(data.table)
 
 ##first, read in the big file, one for each type.
 #comment out those not needed
+colno <- seq(2, 240571, 33)
 
 ##nb it stripped the run number out. May have to infer or re read and force it not to ##strip headers
 smallworldparam <- read.csv("smallworld.csv", header= FALSE, skip=6, nrows = 10)
 colno <- seq(2,ncol(smallworldparam), 33) #calculate all row numbers
 tmp <- smallworldparam[, colno]
 tmp <- as.data.table(t(tmp)) #all hail Hadley Wickham
-names(tmp) <- c("n", "spreadern", "ntype", "ptrustavg", "passlimit", "accpthres", "itrustavg", "stepsn", "fininitval", "whoknows")
+names(tmp) <- c("runnum", "spreadern", "ntype", "ptrustavg", "passlimit", "accpthres", "itrustavg", "stepsn", "fininitval")
 ###SAVE BEFORE CONTINUING
 write.csv(tmp, file="smallworldsettings.csv")
 
@@ -51,8 +52,8 @@ write.csv(swall, file="smallworlddata.csv")
 scalefreeparam <- read.csv("scalefree.csv", header= FALSE, skip=6, nrows = 10)
 tmp1 <- scalefreeparam[, colno]
 tmp1 <- as.data.table(t(tmp1)) #all hail Hadley Wickham
-names(tmp1) <- c("n", "spreadern", "ntype", "ptrustavg", "passlimit", "accpthres", "itrustavg", "stepsn", "fininitval", "whoknows")
-write.csv(tmp, file="scalefreesettings.csv")
+names(tmp1) <- c("runnum", "n", "spreadern", "ntype", "ptrustavg", "passlimit", "accpthres", "itrustavg", "stepsn", "fininitval")
+write.csv(tmp1, file="scalefreesettings.csv")
 
 
 #for some reason, read.csv refused to work here, so I hacked this lovely thing together.
@@ -85,7 +86,7 @@ write.csv(sfall, file="scalefreedata.csv")
 #randomparam <- read.csv("random.csv")
 tmp1 <- randomparam[, colno]
 tmp1 <- as.data.table(t(tmp1)) #all hail Hadley Wickham
-names(tmp1) <- c("n", "spreadern", "ntype", "ptrustavg", "passlimit", "accpthres", "itrustavg", "stepsn", "fininitval", "whoknows")
+names(tmp1) <- c("runnum", "spreadern", "ntype", "ptrustavg", "passlimit", "accpthres", "itrustavg", "stepsn", "fininitval")
 write.csv(tmp, file="randomsettings.csv")
 
 
