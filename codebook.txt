@@ -1,0 +1,45 @@
+"runnum" : run (1-7290) 
+"n": number of agents  (125, 500, 1500)                
+"spreadern": number of initial spreaders (1,3,5)          
+"ntype": network type (small world, scale free)               
+"ptrustavg": average group trust (25, 50, 75, scale 1-100)
+"passlimit": number of times a person can tell the same person said rumor (1)
+"accpthres": acceptance threshold (25, 50, 75, scale 1-100)           
+"itrustavg": average political trust (25, 50, 75, scale 1-100)           
+"stepsn": number of iterations until completion (this could be 150 or 500, if it finishes sooner, then it'll say)          
+"fininitval": disregard
+"whoknows": disregard       
+"X": again, run number                  
+"agents.n": number of agents            
+"links.n": number of links formed             
+"spreaders.avglinks": average number of links among initial rumor spreaders
+"ambiv.n": number of ambivalent agents             
+"ambiv.avglinks": average links among ambivalents      
+"ambiv.cluster.coeff": avg clustering coefficient for ambivalents - how connected its neighbors are
+"ambiv.betweenness": avg betweenness centrality for ambivalents - for every possible pair of turtles in sim, calculate proportion of shortest paths between members of the pair that passes through the current turtle
+"ambiv.eigencent": avg eigenvector-centrality of ambivalents - avg amnt of influence that ambivalents have. Agents who are connected to other well connected agents have higher scores.
+"ambiv.pgrank": avg page rank of ambivalents - avg proportion of time that an agent walking forever at random on network would spend at this node. (see eigenvector centrality for scoring)     
+"ambiv.closeness" : avg closeness centrality of ambivalents - avg of inverse of the average of its distances to all other agents. Isolated turtles score 0.    
+"rej.n" : number of rejectors             
+"rej.avglinks": average no links for rejectors        
+"rej.coeff": avg clustering coeff for rejectors     
+"rej.betweenness" : average betweenness centrality for rejectors
+"rej.eigencent": average eigenvector centrality for rejectors       
+"rej.pgrank": average page rank for rejectors          
+"rej.closeness": avg closeness centrality     
+"aa.n" - number of accept-alls               
+"aa.avglinks" - average number of links for accept-alls      
+ "aa.coeff" - clustering coefficient
+"aa.betweenness"  - betweenness centrality   
+"aa.eigencent" - eigenvector centrality
+"aa.pgrank" - page rank
+"aa.closeness": closeness centrality
+"as.n": number of accept-somes (the Susceptible)
+"as.avglinks": average no links for Susceptible         
+"as.coeff": clustering coeff            
+"as.betweenness": betweenness-centrality     
+"as.eigencent": eigenvector centrality       
+"as.pgrank"  : page rank       
+"as.closeness": closeness centrality     
+"believers.n": final number of believers in the model
+"misinfo.avgexpose.n": Average number of exposures (this may be off. I haven't looked at the numbers but it seems off)
