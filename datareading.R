@@ -48,8 +48,8 @@ qplot(data=sw, x=rej.avglinks, y=stepsn, colour=factor(swn$n))+geom_point() + la
 
 qplot(data=sw, x=rej.avglinks, y=stepsn, colour=factor(swn$n))+geom_point() + labs(title = "Speed of Rumor Penetration as a Function of Rejector Connectedness in Small World Network", x="Average # of Links", y="# Iterations", colour="# Agents") + coord_cartesian(ylim = c(0,50))
 
-qplot(data=sw, x=rej.avglinks, y=stepsn, colour=factor(swn$n))+geom_point() + labs(title = "Speed of Rumor Penetration as a Function of Rejector Connectedness in Small World Network", x="Average # of Links", y="# Iterations", colour="# Agents") + coord_cartesian(ylim = c(0,50))
-qplot(sfn$rej.avglinks, sfn$stepsn, colour=factor(sfn$n))+geom_point()+ labs(title = "Speed of Rumor Penetration as a Function of Rejector Connectedness in Scale Free Network", x="Average # of Links", y="# Iterations", colour="# Agents") + coord_cartesian(ylim = c(0,510))
+qplot(data=sf, x=rej.avglinks, y=stepsn, colour=factor(swn$n))+geom_point() + labs(title = "Speed of Rumor Penetration as a Function of Rejector Connectedness in Small World Network", x="Average # of Links", y="# Iterations", colour="# Agents") + coord_cartesian(ylim = c(0,50))
+qplot(sf$rej.avglinks, sfn$stepsn, colour=factor(sfn$n))+geom_point()+ labs(title = "Speed of Rumor Penetration as a Function of Rejector Connectedness in Scale Free Network", x="Average # of Links", y="# Iterations", colour="# Agents") + coord_cartesian(ylim = c(0,510))
 
 #as a function of spreader n
 
@@ -104,109 +104,32 @@ write.csv(sfnsprnsum2, "sfnsprnbeliefsum.csv")
 ###############################################################
 #subset to smaller numbers to check distributional graphs
 
-###subset to n = 125, 1-5-10 spreaders
-swn125 <- filter(swn, n == 125)
-sfn125 <- filter(sfn, n == 125)
-
-
 
 # avg links of rejectors
-p <- ggplot(data=swn125, aes(x=rej.avglinks, y=pctbelief)) + geom_point()
-p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Rejector Connectedness \nin Small World Network Distributed by Initial Spreader #, N = 125", y="% Believers", x="Avg # Links")
+p <- ggplot(data=swn, aes(x=rej.avglinks, y=pctbelief, colour=n)) + geom_point(alpha=0.5)
+p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Rejector Connectedness in Small World Network ", y="% Believers", x="Avg # Links")+ labs(colour="Total # agents\nin simulation")
 
-p <- ggplot(data=sfn125, aes(x=rej.avglinks, y=pctbelief)) + geom_point()
-p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Rejector Connectedness \nin Scale Free Network Distributed by Initial Spreader #, N = 125", y="% Believers", x="Avg # Links")
+p <- ggplot(data=sfn, aes(x=rej.avglinks, y=pctbelief, colour=n)) + geom_point(alpha=0.5)
+p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Rejector Connectedness in Scale Free Network", y="% Believers", x="Avg # Links")+ labs(colour="Total # agents\nin simulation")
 
 
 #avg links of susceptible
 
-p <- ggplot(data=swn125, aes(x=suscept.links, y=pctbelief)) + geom_point()
-p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Susceptible Connectedness \nin Small World Network Distributed by Initial Spreader #, N = 125", y="% Believers", x="Avg # Links")
+p <- ggplot(data=swn, aes(x=suscept.links, y=pctbelief, colour=n)) + geom_point(alpha=0.5)
+p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Susceptible Connectedness in Small World Network Distributed by Initial Spreader #", y="% Believers", x="Avg # Links") + labs(colour="Total Agents")
 
-p <- ggplot(data=sfn125, aes(x=suscept.links, y=pctbelief)) + geom_point()
-p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Susceptible Connectedness \nin Scale Free Network Distributed by Initial Spreader #, N = 125", y="% Believers", x="Avg # Links")
-
-swn125$mistrust <- as.factor(swn125$mistrust)
-sfn125$mistrust <- as.factor(sfn125$mistrust)
-#check % belief as 
-
-p <- ggplot(data=swn125, aes(x=totaltrust, y=pctbelief, colour = swn125$mistrust)) + geom_point()
-p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Institutional and Interpersonal Trust \nin Small World Network Distributed by Initial Spreader #, N = 125", y="% Believers", x="Avg # Links", colour="Trust Level")
-
-p <- ggplot(data=sfn125, aes(x=totaltrust, y=pctbelief, colour = sfn125$mistrust)) + geom_point()
-p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Rejector Connectedness \nin Scale Free Network Distributed by Initial Spreader #, N = 125", y="% Believers", x="Avg # Links", colour="Trust Level")
-
-
-#subset N= 500
-swn500 <- filter(swn, n == 500)
-sfn500 <- filter(sfn, n == 500)
-
-
-# avg links of rejectors
-p <- ggplot(data=swn500, aes(x=rej.avglinks, y=pctbelief)) + geom_point()
-p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Rejector Connectedness \nin Small World Network Distributed by Initial Spreader #, N = 500", y="% Believers", x="Avg # Links")
-
-p <- ggplot(data=sfn500, aes(x=rej.avglinks, y=pctbelief)) + geom_point()
-p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Rejector Connectedness \nin Scale Free Network Distributed by Initial Spreader #, N = 500", y="% Believers", x="Avg # Links")
-
-
-
-#avg links of susceptible
-
-p <- ggplot(data=swn500, aes(x=suscept.links, y=pctbelief)) + geom_point()
-p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Susceptible Connectedness \nin Small World Network Distributed by Initial Spreader #, N = 500", y="% Believers", x="Avg # Links")
-
-p <- ggplot(data=sfn500, aes(x=suscept.links, y=pctbelief)) + geom_point()
-p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Susceptible Connectedness \nin Scale Free Network Distributed by Initial Spreader #, N = 500", y="% Believers", x="Avg # Links")
-
-swn500$mistrust <- as.factor(swn500$mistrust)
-sfn500$mistrust <- as.factor(sfn500$mistrust)
+p <- ggplot(data=sfn, aes(x=suscept.links, y=pctbelief, colour=n)) + geom_point(alpha=0.5)
+p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Susceptible Connectedness in Scale Free Network", y="% Believers", x="Avg # Links") + labs(colour="Total # agents\nin simulation")
 
 #check % belief as 
 
-p <- ggplot(data=swn500, aes(x=totaltrust, y=pctbelief, colour = swn500$mistrust)) + geom_point()
-p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Institutional and Interpersonal Trust \nin Small World Network Distributed by Initial Spreader #, N = 500", y="% Believers", x="Avg # Links", colour="Trust Level")
+p <- ggplot(data=swn, aes(x=totaltrust, y=pctbelief, colour = swn125$mistrust)) + geom_point(alpha=0.5)
+p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Institutional and Interpersonal Trust in Small World Network", y="% Believers", x="Avg # Links", colour="Trust Level")+ labs(colour="Total # agents\nin simulation")
 
-p <- ggplot(data=sfn500, aes(x=totaltrust, y=pctbelief, colour = sfn500$mistrust)) + geom_point()
-p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Rejector Connectedness \nin Scale Free Network Distributed by Initial Spreader #, N = 500", y="% Believers", x="Avg # Links", colour="Trust Level")
-
-
-
-#N=1500
+p <- ggplot(data=sfn, aes(x=totaltrust, y=pctbelief, colour = sfn125$mistrust)) + geom_point(alpha=0.5)
+p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Rejector Connectedness \nin Scale Free Network", y="% Believers", x="Avg # Links", colour="Trust Level") + labs(colour="Total # agents\nin simulation")
 
 
-swn1500 <- filter(swn, n == 1500)
-sfn1500 <- filter(sfn, n == 1500)
-
-# avg links of rejectors
-p <- ggplot(data=swn1500, aes(x=rej.avglinks, y=pctbelief)) + geom_point()
-p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Rejector Connectedness \nin Small World Network Distributed by Initial Spreader #, N = 1500", y="% Believers", x="Avg # Links")
-
-p <- ggplot(data=sfn1500, aes(x=rej.avglinks, y=pctbelief)) + geom_point()
-p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Rejector Connectedness \nin Scale Free Network Distributed by Initial Spreader #, N = 1500", y="% Believers", x="Avg # Links")
-
-
-sf-pctbelief-rejlinks-1500
-
-
-
-#avg links of susceptible
-
-p <- ggplot(data=swn1500, aes(x=suscept.links, y=pctbelief)) + geom_point()
-p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Susceptible Connectedness \nin Small World Network Distributed by Initial Spreader #, N = 1500", y="% Believers", x="Avg # Links")
-
-p <- ggplot(data=sfn1500, aes(x=suscept.links, y=pctbelief)) + geom_point()
-p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Susceptible Connectedness \nin Scale Free Network Distributed by Initial Spreader #, N = 1500", y="% Believers", x="Avg # Links")
-
-swn1500$mistrust <- as.factor(swn1500$mistrust)
-sfn1500$mistrust <- as.factor(sfn1500$mistrust)
-#check % belief as 
-
-p <- ggplot(data=swn1500, aes(x=totaltrust, y=pctbelief, colour = swn1500$mistrust)) + geom_point()
-p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Institutional and Interpersonal Trust \nin Small World Network Distributed by Initial Spreader #, N = 1500", y="% Believers", x="Avg # Links", colour="Trust Level")
-
-p <- ggplot(data=sfn1500, aes(x=totaltrust, y=pctbelief, colour = sfn1500$mistrust)) + geom_point()
-p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Rejector Connectedness \nin Scale Free Network Distributed by Initial Spreader #, N = 1500", y="% Believers", x="Avg # Links", colour="Trust Level")
 
 
 ############################################################################
