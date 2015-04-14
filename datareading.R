@@ -113,6 +113,25 @@ p <- ggplot(data=sfn, aes(x=rej.avglinks, y=pctbelief, colour=n)) + geom_point(a
 p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Rejector Connectedness in Scale Free Network", y="% Believers", x="Avg # Links")+ labs(colour="Total # agents\nin simulation")
 
 
+
+###oh, boy, multiple facets!?
+p <- ggplot(data=swn, aes(x=rej.avglinks, y=pctbelief, colour=n)) + geom_point(alpha=0.5)
+p + facet_grid(spreadern~accpthres) + labs(title="Proportion of Believers as a Function of Rejector Connectedness in Small World Network ", y="% Believers", x="Avg # Links")+ labs(colour="Total # agents\nin simulation")
+
+p <- ggplot(data=sfn, aes(x=rej.avglinks, y=pctbelief, colour=n)) + geom_point(alpha=0.5)
+p + facet_grid(spreadern~accpthres) + labs(title="Proportion of Believers as a Function of Rejector Connectedness in Scale Free Network", y="% Believers", x="Avg # Links")+ labs(colour="Total # agents\nin simulation")
+
+
+
+
+
+
+
+
+
+
+
+
 #avg links of susceptible
 
 p <- ggplot(data=swn, aes(x=suscept.links, y=pctbelief, colour=n)) + geom_point(alpha=0.5)
@@ -123,7 +142,7 @@ p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function 
 
 #check % belief as 
 
-p <- ggplot(data=swn, aes(x=totaltrust, y=pctbelief, colour = swn125$mistrust)) + geom_point(alpha=0.5)
+p <- ggplot(data=swn, aes(x=totaltrust, y=pctbelief, colour = mistrust)) + geom_point(alpha=0.5)
 p + facet_grid(.~spreadern) + labs(title="Proportion of Believers as a Function of Institutional and Interpersonal Trust in Small World Network", y="% Believers", x="Avg # Links", colour="Trust Level")+ labs(colour="Total # agents\nin simulation")
 
 p <- ggplot(data=sfn, aes(x=totaltrust, y=pctbelief, colour = sfn125$mistrust)) + geom_point(alpha=0.5)
