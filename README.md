@@ -10,8 +10,5 @@ Please contact the owner of this repository with regard to NetLogo code and data
 
 ##Directory Guide:
 1. mpsa2015undirected.nlogo : Code for the paper. Use NetLogo 5.2.0. 
-2. simulationrun1/: repository containing data from ~15000 iterations at various settings of the model (small world and scale-free network types only).Run 1 contains a codebook, full data cleaning and some (but disorganized) analysis code. 
-3. simulationrun2/: repository containing data from run 2. Raw data only, no cleaning or analysis procedures as of yet, mostly due to the fact that there are more settings reported per run. You can try to clean the data by hacking the datacleaning.R file from simulationrun1/ or wait until I do it.
-
-Please note that the data analysis portion of this paper is currently being redone with run2 data.
-
+2. simulationrun1/: repository containing data from ~15000 iterations at various settings of the model (small world and scale-free network types only). Run 1 contains a codebook, full data cleaning and some (but disorganized) analysis code. 
+3. simulationrun2/: repository containing data from run 2. Run 2 does not yet contain a full codebook, as the second run included added reporting variables. They are fairly intuitive to infer if you consult the run 1 codebook. **Please note that there is a mismatch on low N, specifying Small World N = 120 and Scale Free N = 125. This should not affect your data analysis, but be aware when subsetting or specifying settings.
