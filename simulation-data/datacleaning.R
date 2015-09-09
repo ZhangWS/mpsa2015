@@ -95,7 +95,8 @@ write.csv(sfall, file="scalefree2data.csv")
 
 
 #################################################################################
-#Random Networks still not done yet
+#Random Networks was planned but never completed, as it turns out that the paper didn't need this. However, it's still available here in the code.
+
 #randomparam <- read.csv("random.csv")
 tmp1 <- randomparam[, colno]
 tmp1 <- as.data.table(t(tmp1)) #all hail Hadley Wickham
