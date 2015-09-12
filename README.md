@@ -2,7 +2,7 @@
 
 *"Agent-based modeling (ABM) and the Dissemination of Erroneous Information: A viral explanation of rumor propagation"*
 
-Authors: W Zhang, L. A. Caughell and A. B. Cronkhite
+Authors: W Zhang, L. Caughell and A. Cronkhite
 
 This paper was formerly known as *"Did Hillary Clinton throw a lamp or did Harry Reid get into a fistfight? Agent-based modeling (ABM) and the Dissemination of Erroneous Information"* and was presented at the 2015 MPSA Annual Conference.
 
