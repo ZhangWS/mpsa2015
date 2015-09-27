@@ -36,7 +36,7 @@ links-own [
 
 ;global variables
 globals [
-  ;;adjustable sliders on GUI
+  ;;commented values are adjustable sliders on GUI
   
   ;;total-nodes ;; total number of agents in model  
   ;;misinfo-spreaders-num ;; number of initial believers
@@ -72,7 +72,8 @@ to setup
   
 end
 
-  
+
+;;sets up nodes and then assigns them to a turtle breed
 to setup-nodes
   set-default-shape turtles "default" ;;boring circular nodes, I know
   
@@ -107,7 +108,7 @@ to setup-nodes
   ask n-of rejectors-num generals [
     set breed rejectors
     
-       ;;no one's heard anything yet, so pft on accepting it 
+  ;;no one's heard anything yet, so no one accepts it
     set pass-on-misinfo false
     ;;set corresponding color
     set color red
@@ -115,7 +116,7 @@ to setup-nodes
     ]
   
  
-    
+    ;; however, accept-alls will always accept the misinformation and will always pass it on
     ask n-of accept-all-num generals [
       set breed accept-all
       set pass-on-misinfo true
@@ -149,8 +150,10 @@ to setup-nodes
    ]
  
  
+ ;;we assigned average institutional-trust. But in this case, what we actually want is institutional MISTRUST, so we take a difference.
    let temp-mistrust ( 100 - institutional-trust-avg )
-  
+ 
+ ;;and then assign a mistrust value to each turtle drawn from a normal distribution centered upon the mistrust value 
   ask turtles [
     
     set institutional-trust checkbounds ( random-normal temp-mistrust 10 ) 0 100
@@ -159,16 +162,9 @@ to setup-nodes
   
 end
 
-;;to link-neighbor-calc
-;;  let temp [ count link-neighbors ] of self
-;;  ifelse ( temp != false )
-;;  [ set link-neighbor-num temp ] 
-;;  [ set link-neighbor-num 0 ]
-  
-;;end
 
 
-;; make sure that the number + jitter does not go out of some pre-determined boundary
+;; make sure that the number + jitter does not go out of some pre-determined boundary. 
 
 to-report checkbounds [ number lowerbound upperbound]
   if ( number < lowerbound )
@@ -236,10 +232,12 @@ to setup-network
     ]
   ]
    
-   
+ 
+ ;;I kept track of the longest link here.
  set max-length ( max [ link-length ] of links )  
   
-  
+  ;;we now assign a trust value to each social connection. As no one has said anything, the rumor counter is 0
+  ;;nb while the model keeps track of it, we never used the pass-it-on number
   ask links [     
     trust-calc
     set pass-it-on 0 ;;initially, no one will have given the info to anyone else
@@ -531,60 +529,52 @@ false
 PENS
 "default" 1.0 0 -16777216 true "" "plot count turtles with [ accept-misinfo = true ]"
 
-PLOT
-720
-180
-920
-330
-plot 2
-Time
-Average # Times Heard Rumor
-0.0
-10.0
-0.0
-10.0
-true
-false
-"" ""
-PENS
-"default" 1.0 0 -16777216 true "" "plot mean [ exposed-to-misinfo ] of turtles"
-
 @#$#@#$#@
 ## WHAT IS IT?
 
-(a general understanding of what the model is trying to show or explain)
+This is the ABM model for "Agent-based modeling (ABM) and the Dissemination of
+Erroneous Information: A viral explanation of rumor propagation". It was formerly known as "Did Hillary Clinton throw a lamp or did Harry Reid get into a fistfight? Agent-based modeling (ABM) and the Dissemination of Erroneous Information", authors Wenshuo Zhang, Amanda Cronkhite, and Leslie Caughell, and was presented at the 2015 annual conference of the Midwestern Political Science Association. 
+
+Abstract: To understand the spread of misinformation, political scientists must consider both individual- and community-level factors inﬂuencing a rumor’s movement. Adapting an SIR epidemic model used in medicine, we use agent-based modeling (ABM) to simulate how misinformation spreads in diﬀerent ideal network types. Our results indicate that both network type and composition are critical to the time and extent to which a rumor penetrates in a given community. More importantly, our ﬁndings show that, in certain network conﬁgurations, such as that comprised by Twitter, well-connected agents predisposed to reject information can potentially stop the spread of a rumor. Such “rejectors” are likely not equally distributed across the population though, potentially leaving society’s most informationally vulnerable demographics to form political preferences with both insuﬃcient and inaccurate information. To the extent that good political decisions rest on accurate information, an accepted tenet of normative democratic theory, this poses a substantial problem for democracy.
 
 ## HOW IT WORKS
 
-(what rules the agents use to create the overall behavior of the model)
+We derive the basic logic to model how misinformation spreads from the SIR epidemic model, which models how a community is infected with a virus. The numbers for immunity, infection and susceptibility are derived from Adam Berinsky's research on misinformation (2012). To quote from it:  "[his] analysis ﬁnds that a majority of people (65%) will believe at least one rumor, with a smaller percentage (25%) ambivalent and small contingents who will always accept (5%) or reject (5%) a rumor." 
+
 
 ## HOW TO USE IT
 
-(how to use the model, including a description of each of the items in the Interface tab)
+The different sliders are adjustable parameters in the model, including:
+
+1. total-nodes: total number of turtles in the community
+2. network-type: how many connections do turtles form amongst themselves? The choices are small-world, scale-free, star, and random. Please note that our paper only examines Small World and Scale-Free networks
+3. pass-it-on-limit: how many times will an infected turtle/believer try to pass on the rumor? This is included in a previous version as we wanted to test differential exposure, but it was only set to 1, or once, in this model. Basically, people will try to tell others only once. In other words, if a listener does not believe the first time, then the speaker will stop trying. 
+4. misinfo-spread-num: how many believers/spreaders are there at first?
+5. institutional-trust-avg: how much do people trust, on average, their governments and politicians?
+6. personal-trust-avg: how much, on average, do people trust their social connections?
+7. acceptance-threshold: are people generally more likely or less likely to believe something? We provide low-medium-high acceptance thresholds.
 
 ## THINGS TO NOTICE
 
-(suggested things for the user to notice while running the model)
+We provide a graph to plot the percentage of people who believe a rumor over time. The percentage may be a little off, as it only plot the number of believers over the number of people who *can* believe a rumor (nb rejectors will never believe).
 
-## THINGS TO TRY
-
-(suggested things for the user to try to do (move sliders, switches, etc.) with the model)
+For educational purposes, the picture of the community is more interesting. You can use it to visualize the saturation of believers in different types of communities over time.
 
 ## EXTENDING THE MODEL
 
-(suggested things to add or change in the Code tab to make the model more complicated, detailed, accurate, etc.)
+Right now everything, where applicable, uses a normal distribution. If you have a NetLogo-to-R extension installed, you could explore the effect that drawing from other statistical distributions for trust may have on your network. When we tried it, it kept crashing our poor machine.
+
+Second, we tried to take guidance from existing work on political trust - both individual and institutional - to specify how levels of trust varies in a community. I'm sure you could do better!
 
 ## NETLOGO FEATURES
 
-(interesting or unusual features of NetLogo that the model uses, particularly in the Code tab; or where workarounds were needed for missing features)
-
-## RELATED MODELS
-
-(models in the NetLogo Models Library and elsewhere which are of related interest)
+The network extension is required and is explicitly installed at the beginning. Don't take that line off!
 
 ## CREDITS AND REFERENCES
 
-(a reference to the model's URL on the web if it has one, as well as any other necessary credits, citations, and links)
+You may find the code, simulation data and the paper at https://github.com/ZhangWS/mpsa2015. Prof Leslie Caughell is the corresponding author (please see manuscript pdf for contact information). 
+
+For technical issues, e.g. problems accessing the respository, please contact Wenshuo Zhang.
 @#$#@#$#@
 default
 true
