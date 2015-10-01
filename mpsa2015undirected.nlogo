@@ -572,9 +572,7 @@ The network extension is required and is explicitly installed at the beginning. 
 
 ## CREDITS AND REFERENCES
 
-You may find the code, simulation data and the paper at https://github.com/ZhangWS/mpsa2015. Prof Leslie Caughell is the corresponding author (please see manuscript pdf for contact information). 
-
-For technical issues, e.g. problems accessing the respository, please contact Wenshuo Zhang.
+You may find the code, simulation data and the paper at https://github.com/ZhangWS/mpsa2015. Prof Leslie Caughell is the corresponding author (please see manuscript pdf for contact information).
 @#$#@#$#@
 default
 true
